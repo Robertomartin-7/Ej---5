@@ -85,8 +85,13 @@ def calcula_minimo_maximo_pico_por_especie(pingüinos: list[Penguin]) -> dict[st
     dict[str, tuple[float, float]]: Diccionario que asocia cada especie de pingüino con una tupla
                                     que contiene la longitud mínima y máxima del pico.
     """
-    # TODO: Implementar la función
-    pass
+    longitudes_por_especie = defaultdict(list)
+    for p in pingüinos:
+        if p.bill_length_mm != None:
+            longitudes_por_especie[p.species].append(p.bill_length_mm)
+
+    res ={species:(min(longitudes), max(longitudes)) for species, longitudes in longitudes_por_especie.items()}
+    return res
 
 
 def cuenta_pingüinos_por_especie_filtro(pingüinos: list[Penguin], filtra_isla: str = None) -> dict[str, int]:
@@ -100,8 +105,7 @@ def cuenta_pingüinos_por_especie_filtro(pingüinos: list[Penguin], filtra_isla:
     Devuelve:
     dict[str, int]: Diccionario que asocia cada especie de pingüino con su conteo.
     """
-    # TODO: Implementar la función
-    pass
+    return Counter(p.species for p in pingüinos if filtra_isla == None or filtra_isla == p.island)
 
 def calcula_media_masa_corporal_por_especie_filtro(pingüinos: list[Penguin], filtra_isla: str = None) -> dict[str, float]:
     """
@@ -114,8 +118,7 @@ def calcula_media_masa_corporal_por_especie_filtro(pingüinos: list[Penguin], fi
     Devuelve:
     dict[str, float]: Diccionario que asocia cada especie de pingüino con su masa corporal media.
     """
-    # TODO: Implementar la función
-    pass
+    return calcula_media_masa_corporal_por_especie(p for p in pingüinos if filtra_isla == None or p.island == filtra_isla)
 
 def calcula_minimo_maximo_pico_por_especie_filtro(pingüinos: list[Penguin], filtra_isla: str = None) -> dict[str, tuple[float, float]]:
     """
@@ -129,6 +132,6 @@ def calcula_minimo_maximo_pico_por_especie_filtro(pingüinos: list[Penguin], fil
     dict[str, tuple[float, float]]: Diccionario que asocia cada especie de
                                     pingüino con una tupla que contiene la longitud mínima y máxima del pico.
     """
-    # TODO: Implementar la función
-    pass
+    
+    return calcula_minimo_maximo_pico_por_especie(p for p in pingüinos if filtra_isla == None or p.island == filtra_isla)
 
